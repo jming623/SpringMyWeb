@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!-- 
+이곳에서 매퍼 태그를 열고 namespace속성으로 해당 인터페이스  경로를 지정해준뒤 태그하위에 
+select,insert,delete등 인터페이스에서 선언한 추상 메서드를 id속성으로 받아와 sql문을 작성합니다.
+-->
