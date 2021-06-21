@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.team404.command.TestVO;
+
 /**
  * Handles requests for the application home page.
  */
@@ -36,4 +38,24 @@ public class HomeController {
 		return "home";
 	}
 	
+	//타일즈 테블릿 요청
+	@RequestMapping("/aaa")
+	public String aaa() {
+		return "test/aaa";
+	}
+	
+	@RequestMapping("/bbb")
+	public String bbb() {
+		return "test/bbb";
+	}
+	
+	@RequestMapping("/zzz")
+	public String zzz() {
+		return "zzz";
+	}
+	
+	@RequestMapping("/kkk")
+	public String kkk() {
+		return "kkk";
+	}
 }

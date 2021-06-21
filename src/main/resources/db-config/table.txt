@@ -1,1 +1,12 @@
 --db테이블 정보
+
+create table freeboard(
+    bno number(10) primary key,
+    title varchar2(200) not null,
+    writer varchar2(200) not null,
+    content varchar2(2000) not null,
+    regdate date default sysdate,
+    updatedate date default sysdate
+);
+
+create sequence freeboard_seq increment by 1 start with 1 nocache;

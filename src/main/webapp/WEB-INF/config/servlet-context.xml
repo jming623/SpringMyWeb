@@ -6,7 +6,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
-
+		
 	
 	<!-- 핸들러 어댑터,핸들러 맵핑 , 스프링의 여러 어노테이션을 사용할 수 있게 하는 선언 -->
 	<annotation-driven />
@@ -14,10 +14,27 @@
 	<!-- 정적자원 맵핑 resource폴더 아래 파일은 컨트롤러로 실행되지 않고 곧바로 실행-->
 	<resources mapping="/resources/**" location="/resources/" />
 
+	<!-- 타일즈 설정파일 위치 -->
+	<beans:bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:list>
+				<beans:value>/WEB-INF/tiles/tiles.xml</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+
+	<!-- 첫번째로 동작할 타일즈뷰 템플릿 선언 -->
+	<beans:bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+		<beans:property name="order" value="1"/>
+	</beans:bean>
+	
+	<!-- 뷰리졸버를 2번째로 동작하도록 처리 -->
 	<!-- 뷰 리졸버 (컨트롤러에서 받아온 경로를 최종적으로 합성)-->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="2"/>
 	</beans:bean>
 	
 	<context:component-scan base-package="com.team404.*" />

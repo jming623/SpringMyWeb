@@ -34,10 +34,10 @@
 		<!-- 파일이 분리되면(인터페이스와 xml파일) xml매퍼의 위치를 지정해 주어야 한다. -->
 		<!-- <property name="mapperLocations" value="classpath:/sqlmap/*.xml"></property> --> <!-- classpath:/는 resource폴더아래부터 시작 -->
 		
-		<!-- <property name="configLocation" value="classpath:/mybatis-config/mybatis-config.xml"></property> -->
+		<!--  <property name="configLocation" value="classpath:/mybatis-config/mybatis-config.xml"></property>-->
 	</bean>
 	
 	<!-- 마이바티스의 인터페이스를 읽어서 사용할 수 있도록 처리. -->
-	<mybatis-spring:scan base-package="com.team404.mapper"/>	
+	<mybatis-spring:scan base-package="com.team404.*"/>	
 		
 </beans>
