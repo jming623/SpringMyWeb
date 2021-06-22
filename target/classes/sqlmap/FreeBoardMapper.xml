@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace에는 인터페이스에 전체경로가 들어갑니다. -->
+<mapper namespace="com.team404.freeboard.mapper.FreeBoardMapper">
+	
+	<!-- 아이디는 인터페이스에 추상메서드명 -->
+	<insert id="regist">
+		insert into freeboard(bno,title,writer,content) values(freeboard_seq.nextval, #{title}, #{writer}, #{content})
+	</insert> 
+	
+	<select id="getList" resultType="FreeBoardVO"> <!-- resultType에 vo객체에 전체경로가 들어가는데 이걸 간편하게 사용하려고 mybatis-config에 함축적으로 사용할 vo를 선언해주었다. -->
+		select * from freeboard order by bno desc
+	</select>
+	
+	<select id="getDetail" resultType="FreeBoardVo">
+		select * from freeboard where bno = #{bno}
+	</select>
+	
+	<update id="update">
+		update freeboard set writer=#{writer}, title=#{title}, content=#{content}, updatedate=sysdate where bno=#{bno}
+	</update>
+	
+	<delete id="delete">
+		delete from freeboard where bno=#{bno}
+	</delete>
+	
+</mapper>

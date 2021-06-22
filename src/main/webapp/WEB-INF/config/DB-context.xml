@@ -29,15 +29,15 @@
 	
 	<!-- 마이바티스 연결 -->
 	<!-- NameSpace체크, sqlSessionFactoryBean객체를 사용, scan명령 -->
-	<bean id= "sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
-		<!-- 파일이 분리되면(인터페이스와 xml파일) xml매퍼의 위치를 지정해 주어야 한다. -->
-		<!-- <property name="mapperLocations" value="classpath:/sqlmap/*.xml"></property> --> <!-- classpath:/는 resource폴더아래부터 시작 -->
 		
-		<!--  <property name="configLocation" value="classpath:/mybatis-config/mybatis-config.xml"></property>-->
+		<property name="mapperLocations" value="classpath:/sqlmap/*.xml"></property> 
+		
+		<property name="configLocation" value="classpath:/mybatis-config/mybatis-config.xml"></property>
 	</bean>
 	
 	<!-- 마이바티스의 인터페이스를 읽어서 사용할 수 있도록 처리. -->
-	<mybatis-spring:scan base-package="com.team404.*"/>	
+	<mybatis-spring:scan base-package="com.team404.*.mapper"/>	
 		
 </beans>

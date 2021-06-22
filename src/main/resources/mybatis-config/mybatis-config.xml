@@ -2,3 +2,10 @@
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  	
+  	<!-- 마이바티스 설정파일 type에 명시된 클래스 이름을 함축시킵니다. -->
+	<configuration>
+		<typeAliases>
+			<typeAlias type="com.team404.command.FreeBoardVO" alias="FreeBoardVO"/>
+		</typeAliases>
+	</configuration>
