@@ -11,8 +11,62 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into freeboard(bno,title,writer,content) values(freeboard_seq.nextval, #{title}, #{writer}, #{content})
 	</insert> 
 	
-	<select id="getList" resultType="FreeBoardVO"> <!-- resultType에 vo객체에 전체경로가 들어가는데 이걸 간편하게 사용하려고 mybatis-config에 함축적으로 사용할 vo를 선언해주었다. -->
+<!-- 	<select id="getList" resultType="FreeBoardVO"> resultType에 vo객체에 전체경로가 들어가는데 이걸 간편하게 사용하려고 mybatis-config에 함축적으로 사용할 vo를 선언해주었다.
 		select * from freeboard order by bno desc
+	</select> 일반 게시판 sql-->
+	
+	<!-- 페이징처리된 게시판 -->
+	<!-- 마이바티스 xml파일에서 부등호가 태그형태로 인식되는 문제가 있음 <![CDATA[sql구문]]으로 순수한 문자열로 인식하도록 만들어줘서 해결가능 -->
+	<select id="getList" resultType="FreeBoardVO">
+		<![CDATA[
+		select *
+		from(select rownum rn,
+					a.*
+			 from(select *
+				  from freeboard
+				  where
+		]]> <!-- if문을 사용할때 CDATA안에서 사용하면 문자열 처리가 되기떄문에 CDATA를 닫아주고 아래 다시열고 중간에 동적쿼리 if문을  실행해준다.-->
+			<!-- test에는 vo나 ??에 담겨들오는 값에 이름이 들어옵니다.-->
+				
+				  <!-- if,choose는 jstl과 사용이 동일하고, test구문안에는 vo의 setter값이나  map의 key의 값이 들어갈 수 있습니다. -->
+				  
+				  <!-- 동적쿼리 if절 (if구문이 더 많이 쓰임)-->
+				  
+				  <if test="searchType == 'title' ">title like '%'||#{searchName}||'%'</if>
+				  <if test="searchType == 'writer' ">writer like '%'||#{searchName}||'%'</if>
+				  <if test="searchType == 'content' ">content like '%'||#{searchName}||'%'</if>
+				  <if test="searchType == 'titcont' ">content like '%'||#{searchName}||'%' or title like '%'||#{searchName}||'%'</if>
+				  <if test="searchType == null or searchType == '' ">1 = 1</if>
+				  
+				  <!-- 동적쿼리 choose절(if else) -->
+				 <!--  <choose>
+				  	<when test="searchType=='title'">title like '%'||#{searchName}||'%'</when>
+				  	<when test="searchType == 'writer' ">writer like '%'||#{searchName}||'%'</when>
+				  	<when test="searchType == 'content' ">content like '%'||#{searchName}||'%'</when>
+				  	<when test="searchType == 'titcont' ">content like '%'||#{searchName}||'%' or title like '%'||#{searchName}||'%'</when>
+				  	<otherwise>1 = 1</otherwise>
+				  </choose> -->
+		<![CDATA[
+				  order by bno desc) a
+			 )
+		where rn > (#{pageNum}-1) * #{amount} and rn <= #{pageNum} * #{amount} ]]>
+	</select>
+	
+	<!-- 일반게시판 전체게시글 수 -->
+	<!-- <select id="getTotal" resultType="int">
+		select count(*) as total from freeboard
+	</select> -->
+	
+	<!-- 검색+게시판 전체게시글 수 -->
+	<select id="getTotal" resultType="int">
+		select count(*) as total 
+		from freeboard
+		where 
+		<if test="searchType == 'title' ">title like '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'writer' ">writer like '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'content' ">content like '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'titcont' ">content like '%'||#{searchName}||'%' or title like '%'||#{searchName}||'%'</if>
+		<if test="searchType == null or searchType == '' ">1 = 1</if>
 	</select>
 	
 	<select id="getDetail" resultType="FreeBoardVo">

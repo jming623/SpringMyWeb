@@ -14,6 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team404.command.FreeBoardVO;
 import com.team404.freeboard.service.FreeBoardService;
+import com.team404.util.Criteria;
+import com.team404.util.PageVO;
 
 @Controller
 @RequestMapping("/freeBoard")
@@ -24,13 +26,37 @@ public class FreeBoardController {
 	private FreeBoardService freeService; 
 	
 	@RequestMapping("/freeList")
-	public String freeList(Model model) {
+	public String freeList(Model model , Criteria cri) {//값이 넘어오지 않으면 기본생성자로 생기고, 값이 넘오면 두개의 값이 자동으로 정리되서 들어옴
 		
-		ArrayList<FreeBoardVO> list = freeService.getList();
 		
-		model.addAttribute("list", list); //화면에 전달(전달할 값이 여러개라면 맵으로 보낼 수 있음.)
+		//게시판 기본
+//		ArrayList<FreeBoardVO> list = freeService.getList();	
+//		model.addAttribute("list", list); //화면에 전달(전달할 값이 여러개라면 맵으로 보낼 수 있음.)		
+//		System.out.println("확인"+list.toString());
 		
-		System.out.println("확인"+list.toString());
+		//페이지 게시판
+//		ArrayList<FreeBoardVO> list = freeService.getList(cri);
+//		
+//		PageVO pageVO = new PageVO(cri,freeService.getTotal());
+		
+//		System.out.println(pageVO.toString());
+//		
+//		model.addAttribute("pageVO", pageVO);
+//		model.addAttribute("list", list);
+		
+		
+		//페이지 + 검색 게시판(검색 키워드에 따라서 게시글수와 데이터가 변경)
+		ArrayList<FreeBoardVO> list = freeService.getList(cri);
+		System.out.println("toString확인"+list.toString());
+		System.out.println(cri.toString());
+		
+		int total = freeService.getTotal(cri);
+		PageVO pageVO = new PageVO(cri,total);
+		
+		System.out.println(pageVO.toString());
+	
+		model.addAttribute("pageVO", pageVO);
+		model.addAttribute("list", list);
 		
 		return "/freeBoard/freeList";
 	}
