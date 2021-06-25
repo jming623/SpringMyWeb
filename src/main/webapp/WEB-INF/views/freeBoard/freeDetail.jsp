@@ -54,14 +54,14 @@
                             </div>
                             <!--form-control은 부트스트랩의 클래스입니다-->
 	                    <div class="reply-content">
-	                        <textarea class="form-control" rows="3"></textarea>
+	                        <textarea class="form-control" rows="3" name="reply" id="reply"></textarea>
 	                        <div class="reply-group">
 	                              <div class="reply-input">
-	                              <input type="text" class="form-control" placeholder="이름">
-	                              <input type="password" class="form-control" placeholder="비밀번호">
+	                              <input type="text" class="form-control" placeholder="이름" name="replyId" id="replyId">
+	                              <input type="password" class="form-control" placeholder="비밀번호" name="replyPw" id="replyPw">
 	                              </div>
 	                              
-	                              <button type="button" class="right btn btn-info">등록하기</button>
+	                              <button type="button" class="right btn btn-info" id="replyRegist">등록하기</button>
 	                        </div>
 	
 	                    </div>
@@ -115,3 +115,57 @@
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		
+		$(document).ready(function(){
+			//등록이벤트
+			$("#replyRegist").click(function(){
+				
+				var bno = "${boardVO.bno }";//글번호
+				var reply = $("#reply").val();
+				var replyId = $("#replyId").val();
+				var replyPw = $("#replyPw").val();
+				
+				if(reply=='' ||replyId=='' ||replyPw==''){
+					alert("이름,비밀번호,내용은 필수입니다.");
+					return;
+				}
+				
+			$.ajax({
+				type: "post",
+				url: "../reply/replyRegist", //같은 서버기때문에 상대경로로 주어도o 현재경로가 /myweb/freeBoard까지 들어가있는상태니까 contextpath까지 가려면 상위경로로 한번 올라와야한다. 
+				dataType: "json",//생략가능
+				contentType: "application/json; charset=UTF-8",//charset은 생략가능
+				data: JSON.stringify({"bno":bno,"reply":reply,"replyId":replyId,"replyPw":replyPw}),//키가 VO의 멤버변수명과 같아야 매핑이되어 들어갑니다.
+				success: function(data){
+					if(data == 1){//등록 성공
+						$("#reply").val("");
+						$("#replyId").val("");
+						$("#replyPw").val("");
+						getList(); //데이터가 등록된이후에 데이터 조회
+					}else{//등록 실패
+						alert("등록에 실패했습니다. 다시 시도하세요");
+					}
+				},//data값으로는 controller에 replyRegist의 return값이 돌아옴
+				error: function(status,error){console.log(status,error);}				
+			});
+				
+			})
+			getList(); //데이터조회 메서드 호출 클릭이 일어나기전부터 실행됨.
+			
+			//데이터조회
+			function getList(){
+				
+				var bno = "${boardVO.bno}";
+				var pageNum = 1;
+				
+				$.getJSON("../reply/getList/"+bno+"/"+pageNum,function(data){ //(요청주소,콜백함수) //get방식의 페스베리어블 방식으로 주소에 값을 담아 넘겨준다.
+					
+					console.log(data);				
+				}) 
+			}
+			
+		});//end ready
+	
+	</script>

@@ -1,5 +1,6 @@
 --db테이블 정보
 
+--게시글 테이블
 create table freeboard(
     bno number(10) primary key,
     title varchar2(200) not null,
@@ -8,5 +9,21 @@ create table freeboard(
     regdate date default sysdate,
     updatedate date default sysdate
 );
-
+--게시글 시퀀스
 create sequence freeboard_seq increment by 1 start with 1 nocache;
+
+=================================================================================================================
+
+--댓글 테이블(논리적 구조에서는 글과 댓글이 1:n관계를 가지기 때문에 freeboard에 pk가 freereply에 fk가 되어야하지만,
+--물리적 구조에서 fk로 잡아주면 글을 삭제할때 댓글이 존재해 삭제되지 못하는 문제가 발생됨 그래서 테이블 생성시 bno는 fk로잡지않고 그냥 선언함.
+create table freereply(
+    rno number(10) primary key, --댓글번호
+    bno number(10), --글번호
+    reply varchar2(1000),
+    replyid varchar2(200),
+    replypw varchar2(200),
+    replydate date default sysdate, 
+    updatedate date default sysdate
+);
+--댓글 시퀀스
+create sequence freereply_seq increment by 1 start with 1 nocache;

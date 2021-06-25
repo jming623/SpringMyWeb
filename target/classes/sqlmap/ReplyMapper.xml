@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace에는 인터페이스에 전체경로가 들어갑니다. -->
+
+<mapper namespace="com.team404.reply.mapper.ReplyMapper">
+
+	<insert id="regist">
+		insert into freereply(rno,bno,reply,replyid,replypw)
+		values(freereply_seq.nextval,#{bno},#{reply},#{replyId},#{replyPw})
+	</insert>
+	
+	<select id="getList" resultType="FreeReplyVO">
+		select bno,rno,reply,replyid,replydate,updatedate 
+		from freereply where bno = #{bno} order by rno desc
+	</select>
+</mapper>
