@@ -13,7 +13,7 @@ public class PageVO {
 	
 	private int pageNum; //조회하는 페이지번호(cri안에도 존재함)
 	private int amount; //보여질 데이터 갯수	
-	private Criteria cri;
+	private Criteria cri; //검색작업시 사용됨
 	
 	//생성자
 	public PageVO(Criteria cri, int total) {

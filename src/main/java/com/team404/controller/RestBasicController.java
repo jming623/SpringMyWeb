@@ -22,7 +22,7 @@ public class RestBasicController {
 	/*
 	 * 1. RestController는 기본적으로 return에 담기는 값이 뷰 리졸버로 가는게 아니고, 요청된 주소로 반환됩니다.
 	 * 2. Rest API에서 produces키워드는 보내는 데이터에 대한 내용.
-	 * 				 consumers는 전달받는 데이터에 대한 내용(받아오는 일이 그렇게 많지는 않음).
+	 * 				 consumers는 전달받는 데이터에 대한 내용(받아오-는 일이 그렇게 많지는 않음).
 		
 	
 	*/
