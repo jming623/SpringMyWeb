@@ -17,6 +17,6 @@
 <body>
 	<!-- User화면 템플릿 -->
 	<tiles:insertAttribute name="header"/>
-	<tiles:insertAttribute name= body/>
+	<tiles:insertAttribute name= "body"/>
 </body>
 </html>

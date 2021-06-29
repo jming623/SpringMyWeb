@@ -323,7 +323,7 @@
 						if(data == 1){ //삭제성공														
 							$("#modalPw").val("");
 							$("#replyModal").modal("hide");
-							getList();							
+							getList(1,true);							
 						}else{//삭제 실패(비밀번호가 틀릴경우)
 							alert("비밀번호를 확인해주세요");
 							$("#modalPw").val("");

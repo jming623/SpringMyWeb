@@ -53,6 +53,7 @@
 	<!-- 3.직접화면으로 사용 할 경우 -->
 	<definition name="zzz" template="/WEB-INF/views/test/zzz.jsp"/>
 	<definition name="kkk" template="/WEB-INF/views/test/kkk.jsp"/>
+	<definition name="test01" template="/WEB-INF/views/test/test01.jsp"/>
 	
 	
 </tiles-definitions>

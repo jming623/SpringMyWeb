@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.team404.command.TestVO;
+import com.team404.command.UserInfoVO;
 
 @RestController // 비동기 전용 컨트롤러 (@RequestBody + @ResponseBody)
 public class RestBasicController {
@@ -139,5 +140,36 @@ public class RestBasicController {
 		
 		return list;
 	}
+	
+//	@GetMapping("/getData/{key}/{code}")
+//	public HashMap<String,UserInfoVO> getData(@PathVariable("key") String key,
+//											  @PathVariable("code") String code){
+//		
+//		System.out.println("비동기요청으로 받은 인증키값:"+key+"사원코드:"+code);
+//		
+//		HashMap<String, UserInfoVO> map = new HashMap<>();
+//		
+//		UserInfoVO user1 = new UserInfoVO(1,"홍길동","서울특별시 강남구 테헤란로 7길 7");//회원번호,회원이름,회원주소
+//		
+//		map.put("user1",user1);
+//		
+//		return map;
+//	}
+	
+	
+	@PostMapping(value="/getData", consumes="application/json", produces="application/xml" )
+	public HashMap<String,Object> getData(@RequestBody TestVO vo){
+		
+		System.out.println(vo.toString());
+		
+		HashMap<String,Object> map = new HashMap<>();
+		
+		TestVO data = new TestVO("작성자","내용","문자형식날짜");
+		
+		map.put("data",data);
+		
+		return map;
+	}
+	
 	
 }
