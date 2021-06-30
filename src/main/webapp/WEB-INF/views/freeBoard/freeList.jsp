@@ -107,7 +107,11 @@
                         	<li><a href="#" data-pagenum="${pageVO.endPage+1 } ">다음</a></li>
                         </c:if>                          
                     </ul>
-                    <button type="button" class="btn btn-info" onclick="location.href='freeRegist'">글쓰기</button>
+                    
+                    <c:if test="${sessionScope.userVO != null }">
+                    	<button type="button" class="btn btn-info" onclick="location.href='freeRegist'">글쓰기</button>
+                    </c:if>
+                    
                     </div>
                     
                     <!-- 필요한 값을 hidden으로 숨겨 나간다. -->

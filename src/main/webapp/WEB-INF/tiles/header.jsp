@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	<header>
         <div class="container-fluid">
             <div class="row">
@@ -12,7 +13,7 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="#"><img width="30" src="${pageContext.request.contextPath }/resources/img/logo.svg" alt="Brand"></a>
+                            <a class="navbar-brand" href="${pageContext.request.contextPath}"><img width="30" src="${pageContext.request.contextPath }/resources/img/logo.svg" alt="Brand"></a>
                         </div>
 
 
@@ -32,11 +33,18 @@
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">로그인
                                         <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="${pageContext.request.contextPath }/user/userJoin"><span class="glyphicon glyphicon-user"></span>Join</a></li>
-                                        <li><a href="${pageContext.request.contextPath }/user/userLogin"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
-                                        <li><a href="${pageContext.request.contextPath }/user/userMypage"><span class="glyphicon glyphicon-user"></span>MyPage</a></li>
-                                        <li><a href="${pageContext.request.contextPath }/user/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+                                    <ul class="dropdown-menu"><!-- 로그인이 되있으면  MyPage,LogOut만 보여주고 안되있으면 join,login만 보이게 처리한다. -->
+                                    
+                                    	<c:choose>
+                                    		<c:when test="${sessionScope.userVO eq null }">                                    	
+                                        		<li><a href="${pageContext.request.contextPath }/user/userJoin"><span class="glyphicon glyphicon-user"></span>Join</a></li>
+                                        		<li><a href="${pageContext.request.contextPath }/user/userLogin"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+                                        	</c:when>
+                                        	<c:otherwise>
+                                        		<li><a href="${pageContext.request.contextPath }/user/userMypage"><span class="glyphicon glyphicon-user"></span>MyPage</a></li>
+                                        		<li><a href="${pageContext.request.contextPath }/user/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>                                        
+                                        	</c:otherwise>
+                                        </c:choose>
                                     </ul>
                                 </li>
                             </ul>

@@ -105,7 +105,7 @@
     			return;
     		}
     		
-    		//비동기 처리 ((restController가 아닌)일반컨르롤러로 비동기를 보내는 방법을 실습)
+    		//비동기 처리 ((restController가 아닌)일반컨트롤러로 비동기를 보내는 방법을 실습)
     		$.ajax({
     			type: "post",
     			url: "idCheck",

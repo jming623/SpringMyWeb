@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team404.command.UserVO;
@@ -39,8 +40,21 @@ public class UserController {
 	
 	//마이페이지화면
 	@RequestMapping("/userMypage")
-	public String userMypage() {
+	public String userMypage(HttpSession session, Model model) {
 		
+//		if(session.getAttribute("userVO") == null) { //로그인이 안된상태
+//			
+//			return "redirect:/user/userLogin"; 
+//			//이렇게 일일이 작업할 수있지만, 만약 작업해야할 페이지가 50~100개가 된다면 일일이 처리 할 수만은 없다. 이떄 intercepter사용
+//		}
+		
+		UserVO userVO = (UserVO)session.getAttribute("userVO");
+		String userId = userVO.getUserId();
+		
+		UserVO userInfo = userService.getInfo(userId);
+				
+		model.addAttribute("userInfo", userInfo);
+				
 		return "user/userMypage";
 	}
 	
@@ -75,26 +89,55 @@ public class UserController {
 		return "redirect:/user/userLogin";		
 	}
 	
-	//로그인
+//	//로그인
+//	@RequestMapping(value="loginForm", method=RequestMethod.POST)
+//	public String loginForm(UserVO vo, HttpSession session, Model model) { //spring에서 세션은 매게변수에 HttpSession을 넣어주면 사용할 수있다.
+//		
+//		//로그인 처리
+//		UserVO userVO = userService.login(vo);
+//		
+//		if(userVO != null) {//로그인 성공
+//			System.out.println(userVO.toString());
+//			session.setAttribute("userVO", userVO); //세션에 회원정보 저장
+//			
+//			return "redirect:/";
+//			
+//		}else {//로그인 실패
+//			System.out.println("로그인실패");
+//			model.addAttribute("msg", "아이디 비빌번호를 확인하세요");
+//			
+//			return "user/userLogin";
+//		}
+//						
+//	}
+	
+	//postHandler를 사용해서 로그인 요청
 	@RequestMapping(value="loginForm", method=RequestMethod.POST)
-	public String loginForm(UserVO vo, HttpSession session, Model model) { //spring에서 세션은 매게변수에 HttpSession을 넣어주면 사용할 수있다.
+	public ModelAndView loginForm(UserVO vo) {
 		
 		//로그인 처리
 		UserVO userVO = userService.login(vo);
 		
-		if(userVO != null) {//로그인 성공
-			System.out.println(userVO.toString());
-			session.setAttribute("userVO", userVO); //세션에 회원정보 저장
-			
-			return "redirect:/";
-			
-		}else {//로그인 실패
-			System.out.println("로그인실패");
-			model.addAttribute("msg", "아이디 비빌번호를 확인하세요");
-			
-			return "user/userLogin";
+		ModelAndView mv = new ModelAndView();
+		
+		if(userVO != null) { //로그인 성공
+			mv.addObject("login", userVO);						
+		}else { //로그인 실패
+			mv.addObject("msg", "아이디 비밀번호를 확인하세요");
 		}
-						
+		
+		
+		return mv; //디스패쳐 서블릿으로 반환 
+	}
+	
+	
+	//로그아웃
+	@RequestMapping("/logout")
+	public String userLogout(HttpSession session) {
+		
+		session.invalidate(); //세션전체삭제
+		
+		return "redirect:/"; //홈
 	}
 	
 }

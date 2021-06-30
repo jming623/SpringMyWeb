@@ -13,7 +13,7 @@
 						<tbody class="t-control">
 							<tr>
 								<td class="t-title">NAME</td>
-								<td><input class="form-control input-sm" name="writer" required="required"></td>
+								<td><input class="form-control input-sm" name="writer" value="${sessionScope.userVO.userId }" readonly required="required"></td>
 							</tr>
 							<tr>
 								<td class="t-title">TITLE</td>
