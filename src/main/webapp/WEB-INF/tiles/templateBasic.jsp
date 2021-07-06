@@ -11,6 +11,7 @@
     <script src="${pageContext.request.contextPath }/resources/js/jquery.js"></script>
     <link href="${pageContext.request.contextPath }/resources/css/style.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath }/resources/js/bootstrap.js"></script>
+    <link href="${pageContext.request.contextPath }/resources/css/sns.css" rel="stylesheet">
     
 </head>
 <body>
