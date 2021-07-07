@@ -55,8 +55,8 @@
 
 					<!-- 파일 업로드 폼 끝 -->
 					<div id="contentDiv">
-					<div class="title-inner">
-						<!--제목영역-->
+					<!-- <div class="title-inner">
+						
 						<div class="profile">
 							<img src="../resources/img/profile.png">
 						</div>
@@ -66,23 +66,23 @@
 						</div>
 					</div>
 					<div class="content-inner">
-						<!--내용영역-->
+						
 						<p>삶이 우리를 끝없이 시험하기에 고어텍스는 한계를 테스트합니다</p>
 					</div>
 					<div class="image-inner">
-						<!-- 이미지영역 -->
+						
 						<img src="../resources/img/facebook.jpg">
 						
 					</div>
 					<div class="like-inner">
-						<!--좋아요-->
+						
 						<img src="../resources/img/icon.jpg"> <span>522</span>
 					</div>
 					<div class="link-inner">
 						<a href="##"><i class="glyphicon glyphicon-thumbs-up"></i>좋아요</a>
 						<a href="##"><i class="glyphicon glyphicon-comment"></i>댓글달기</a> 
 						<a href="##"><i class="glyphicon glyphicon-remove"></i>삭제하기</a>
-					</div>
+					</div> -->
 					</div>
 				</div>
 				<!--우측 어사이드-->
@@ -139,6 +139,8 @@
 	<script>
 		$(document).ready(function(){
 			
+			getList();
+			
 			$("#uploadBtn").click(function(){
 				
 				var content = $("#content").val();
@@ -146,7 +148,7 @@
 				
 				file = file.slice(file.lastIndexOf(".",file.length)+1,file.length);
 				
-				console.log(file);
+				console.log(file);//확장자만 잘라줌
 				
 				if(file != "jpg" && file != 'png' && file != 'bmp'){
 					alert("이미지 파일형태만 등록가능합니다.(jpg,png,bmp)");
@@ -172,7 +174,7 @@
 				$.ajax({
 					type: "post",
 					url: "snsUpload",
-					/* 비동기방식으로 보낼때 꼭 선언해주어야할 두가지 */
+					/* 비동기방식으로 폼데이터를 보낼때 꼭 선언해주어야할 두가지 */
 					processData: false,// 키 =값으로 전송되는것을 막는 옵션
 					contentType : false, //default 멀티파트 폼데이터 형식으로 지정
 					data : formData,
@@ -182,6 +184,7 @@
 							$("#file").val('');
 							$("#content").val('');
 							$(".fileDiv").css("display","none");//안보이도록 처리
+							getList();
 							alert("등록 성공!!");
 						}else if(data == "idFail"){
 							alert("로그인이 필요한 서비스입니다.");
@@ -195,7 +198,52 @@
 					
 				})
 				
-			});
+			});//등록이벤트
+			
+			
+			function getList(){
+				
+				$.getJSON("getList", function(data){//(요청경로, 콜백함수)//ajax get방식의 돌아오는 값을 편하게 받을 수 있음
+					console.log(data);
+				
+					var strAdd="";
+					for(var i = 0; i < data.length; i++){
+						strAdd += '<div class="title-inner">';						
+						strAdd += '<div class="profile">';
+						strAdd += '<img src="../resources/img/profile.png">';
+						strAdd += '</div>';
+						strAdd += '<div class="title">';
+						strAdd += '<p>'+ data[i].writer +'</p>';
+						strAdd += '<small>'+ data[i].regdate +'</small>';
+						strAdd += '</div>';
+						strAdd += '</div>';
+						strAdd += '<div class="content-inner">';						
+						strAdd += '<p>'+ data[i].content +'</p>';
+						strAdd += '</div>';
+						strAdd += '<div class="image-inner">';
+						//strAdd += '<img src="'+ data[i].uploadPath+ '/'+ data[i].fileName +'">';
+						strAdd += '<img src="view/'+ data[i].fileLoca + '/' + data[i].fileName +'">';
+						//파일다운로드
+						strAdd += '<a href="download/'+ data[i].fileLoca + '/' + data[i].fileName +'">다운로드</a>';
+						strAdd += '</div>';
+						strAdd += '<div class="like-inner">';
+						strAdd += '<img src="../resources/img/icon.jpg"> <span>522</span>';
+						strAdd += '</div>';
+						strAdd += '<div class="link-inner">';
+						strAdd += '<a href="##"><i class="glyphicon glyphicon-thumbs-up"></i>좋아요</a>';
+						strAdd += '<a href="##"><i class="glyphicon glyphicon-comment"></i>댓글달기</a>'; 
+						strAdd += '<a href="##"><i class="glyphicon glyphicon-remove"></i>삭제하기</a>';
+						strAdd += '</div>';
+						//이미지 (224라인)를 불러올때 톰켓에서는 로컬환경에 접근할 수 없기떄문에 src에서 자바 컨트롤러보내줘서 그곳에서 파일을 불러오고 받아오는 방식을 사용해야합니다.
+					}
+					
+					$("#contentDiv").html(strAdd);
+								
+				}); 
+				
+			}
+			
+			
 			
 		})
 	
