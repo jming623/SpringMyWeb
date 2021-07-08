@@ -1,0 +1,171 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+*{
+    padding: 0;
+   margin: 0;
+   box-sizing: border-box; 
+  }
+
+
+  body, html{
+      font-family: 'Noto Sans KR', sans-serif;/* 웹폰트적용 */
+      width:100%;
+      min-width: 320px;
+      color:#fff;
+     
+      background-color:rgb(19, 18, 18);
+  }
+
+  img{
+      max-width: 100%; /* 사이즈가 변했을 때 넓이 유지 */
+      height: auto; /* 넓이에 따라서 높이가 변함 */
+  }
+
+  input, textarea, button, select{ /* 기본적인 태그들이 가지고있는 디자인을 제거 */
+      -webkit-appearance: none; /*크롬,사파리*/ /* 브라우저별로 고유하게 적용되는 form관련 요소들의 css제거 */
+      -moz-appearance: none; /*파이어폭스*/
+      -o-appearance: none;
+  }
+
+  ul,li,dl,ol{
+      list-style: none;
+  }
+
+ 
+
+/* */
+.mypage{
+    margin-top: 120px;
+    
+}
+
+.container{
+    width:40%;
+    margin:0 auto;
+}
+
+
+
+@media (max-width:767px){ /* 767이하에서 동작 */
+    .container{
+        width: 100%;
+    }
+}
+
+.mypage-title{
+    text-align: center;   
+    margin-bottom: 15px; 
+}
+
+.mypage-title > span{
+    font-size: large;
+    border-top: 1px solid #777;
+    border-bottom: 1px solid #777;
+    padding:10px;
+    margin-top: 10px;
+    display: inline-block;
+    
+}
+
+.mypage-nav{
+    border-bottom: 0;
+    width:100%;
+}
+
+.mypage-nav li{
+    float:right;
+}
+
+.mypage-nav li a{
+    color: white;
+    margin:0px;
+}
+
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    color: black;
+    cursor: default;
+    background-color: #d2d2d2;
+    border: 1px solid #777;
+    /* border-bottom-color: transparent; */
+}
+
+.mypage-wrap{
+    /* border: 1px solid #d2d2d2;   */
+    min-height: 650px;
+    
+}
+
+
+
+.mypage-input{
+    padding: 0;
+}
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    cursor: not-allowed;
+    background-color: white;
+    
+}
+
+
+.mypage-input:focus{
+    border-color: #777;
+    box-shadow: none;
+}
+
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    padding: 5px 0px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 0;
+}
+
+.mypage-modify-ph, .mypage-modify-zipcode{
+    width: 83%;
+    float: left;
+    border-radius: 4px 0px 0px 4px;
+}
+
+.mypage-modify-Btn{
+    float: left;
+    border-radius: 0px 4px 4px 0px;
+    width: 17%;
+}
+
+.mypage-content{
+    background-color: #1c1c1c;
+    padding-top: 10px;
+    padding-left: 10px;
+    border-top: 1px solid #fff;
+    text-align: left;
+    box-sizing: border-box;    
+}
+
+
+.mypage-content-body tr{
+    border-top: 1px solid #fff;
+}
+
+.mypage-content-body tr td{
+    color:#fff;
+}
+
+.mypage-content-body tr td a{
+    color:#fff;
+}
+
+.mypage-content-page li a{
+    background-color: #1c1c1c;
+    color: #ddd;
+}
+
+.pagination{
+    margin:10px 0px;
+}
+
+.mypage-content-wrap > tbody > tr > td{
+    padding: 9px 0px;
+}

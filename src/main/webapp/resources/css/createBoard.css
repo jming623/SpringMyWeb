@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+
+body, html{
+    
+    min-height: 1230px;
+    font-family: 'Noto Sans KR', sans-serif;/* 웹폰트적용 */
+    width:100%;
+    min-width: 320px;
+    background-color:#2d2d2d;
+    background-color: rgb(19, 18, 18);
+    color:white;
+}
+
+section{
+    margin-top: 100px;
+}
+
+.container{
+    width:1250px;
+    padding: 0px;
+}
+
+.creation-list:hover{
+    cursor: pointer;
+}
+
+.creation-list-wrap{
+    margin-bottom: 15px;
+}
+
+.prod-img img{
+    width:100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+@media (min-width: 992px){    
+   .col-md-3 {
+        width: 20%;
+    }
+}
+
+.prod-img{
+    margin-bottom: 5px;
+    
+}
+
+.prod-profile{
+    overflow: hidden;
+}
+
+.prod-profile-img a strong{
+    color:#fff;
+    
+}
+
+.prod-profile-img a{
+    color: #fff;
+    text-decoration: none;
+}
+
+.prod-profile-img{
+    display: inline-block   ;
+}
+
+.prod-profile-img img{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 5px;
+    float: left;
+}
+
+.prod-profile-img strong{
+    line-height: 2.5;
+    font-size: 12px;
+}
+
+.prod-profile-star{
+    float: right;
+}
+
+.prod-profile-star > ul {
+    display: inline-block;
+    margin: 0px;
+    list-style: none;
+    margin-right: 7px;
+    line-height: 2;
+}
+
+.prod-profile-star > ul > li {
+    display: inline-block;
+   
+    list-style: none;
+}
+
+.prod-profile-star > ul > li > i {
+    color: #e49f1f;
+}
+
+.creation-list-btn{
+    margin-bottom: 10px;
+}
+
+
+.creation-list-btn button{
+    width:100px;
+    height: 30px;
+    background-color: #2d2d2d;
+    border-radius: 10px;
+    border: 0px;
+    margin-right: 3px;
+    
+}
+
+.creation-list-active{
+    background-color: #aaa7a7 !important;
+}
+
+
+
+
+
+

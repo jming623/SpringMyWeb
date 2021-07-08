@@ -1,0 +1,296 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+*{
+    padding: 0;
+   margin: 0;
+   box-sizing: border-box; 
+  }
+
+
+  body, html{
+      min-height: 1200px;
+      font-family: 'Noto Sans KR', sans-serif;/* 웹폰트적용 */
+      width:100%;
+      min-width: 320px;
+      background-color:#2d2d2d;
+      background-color: rgb(19, 18, 18);
+      color:white;
+  }
+
+  section{
+    margin-top:80px;
+  }
+
+  img{
+      max-width: 100%; /* 사이즈가 변했을 때 넓이 유지 */
+      height: auto; /* 넓이에 따라서 높이가 변함 */
+  }
+
+  input, textarea, button, select{ /* 기본적인 태그들이 가지고있는 디자인을 제거 */
+      -webkit-appearance: none; /*크롬,사파리*/ /* 브라우저별로 고유하게 적용되는 form관련 요소들의 css제거 */
+      -moz-appearance: none; /*파이어폭스*/
+      -o-appearance: none;
+  }
+
+  ul,li,dl,ol{
+      list-style: none;
+  }
+
+  /*  */
+
+  .profile-header{
+    z-index: 20;
+    box-sizing: border-box;
+    margin: 0px;
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center;
+    width:100%;
+    height:400px;
+    background-image: url("http://localhost:8181/myweb/resources/img/background.jpg");
+  }
+
+  .profile-content{
+      margin: 0px 80px;
+      
+  }
+
+  .creator-profile{
+      width:250px;
+      height: auto;
+      margin-top: -70px;
+      margin-right:50px;
+      float: left;
+      position: relative;
+      z-index: 20;
+  }
+
+  .creator-profile-img{
+      background-color: white;
+      width:140px;
+      height:140px;
+      border-radius: 50%;
+  }
+
+  .creator-profile-img > form img{
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 6px;
+    margin-left: 6px;
+  }
+
+  .creator-name{
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 26px;
+    margin-top: 16px;
+    min-height: 26px;
+  }
+
+  .creator-email{
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 26px;
+    margin-top: 16px;
+    min-height: 26px;
+  }
+
+  .creator-description{
+      margin-top:24px;
+  }
+
+  .creator-social{
+    margin-top: 15px;  
+    height:35px;
+      width:35px;
+  }
+
+  .creator-social > a > img { 
+    width: 33px;
+  }
+
+  .creator-content{
+    margin-top: 80px;
+    float: left; 
+  }
+
+  .creator-content-nav li a{
+    animation-duration: 3s; animation-name: rainbowLink; animation-iteration-count: infinite; } 
+    @keyframes rainbowLink {     
+    0% { color: #ff2a2a; }
+    15% { color: #ff7a2a; }
+    30% { color: #ffc52a; }
+    /* 45% { color: #43ff2a; } */
+    60% { color: #2a89ff; }
+    75% { color: #202082; }
+    90% { color: #6b2aff; } 
+    100% { color: #e82aff; }
+  } 
+
+  .creator-content-info{
+    border: 1px solid #ddd;
+    border-radius: 0px 4px 4px 4px;
+    width:100%;
+    min-height:500px;
+    background-color: #1c1c1c;
+    padding:20px;
+    
+  }
+
+  .creator-content-info-detail{
+    overflow: hidden;
+  }
+
+  .creator-content-info p{  
+    font-size: 20px;
+  }
+
+  .creator-content-info-detail small{
+    display: inline-block;
+    width:100%;
+    min-height: 150px;
+    margin:0px;
+    font-size: 15px;
+  }
+
+.creator-content-writing{
+  padding-top: 10px;
+  padding-left:10px;
+  
+  background-color: #1c1c1c;
+}
+
+.creator-content-writing-page li a{
+  background-color: #1c1c1c;
+  color: #ddd;
+}
+
+.creator-content-writing-tbody tr td a{
+  color:#ddd;
+}
+
+
+/* 제작자 수정페이지 */
+
+.creator-profile-img-modify{
+  margin-top: -39px;
+  margin-left: 106px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  background-color: #ddd;
+  text-align: center;
+  position: absolute;
+  cursor: pointer;
+}
+.creator-profile-img-modify > a ,.creator-profile-header-modify > a{
+  line-height: 42px;
+}
+
+.creator-profile-img-modify > a > i {
+  background-image: url("	https://static.xx.fbcdn.net/rsrc.php/v3/yY/r/xav6oWZUykI.png"); 
+  width: 20px;
+  height: 20px;
+  background-position: 0 -108px;
+  background-size: auto;
+  background-repeat: no-repeat;
+  display: inline-block;
+  margin-top: 6px;
+}
+
+.creator-profile-header-modify > a > i{
+  background-image: url("	https://static.xx.fbcdn.net/rsrc.php/v3/yY/r/xav6oWZUykI.png");
+  
+  width: 20px;
+  height: 18px;
+  background-position: 1px -108px;
+  background-size: auto;
+  background-repeat: no-repeat;
+  display: inline-block;
+  
+}
+
+.profile-header-inner{
+  margin-top: 348px;
+  overflow: hidden;
+  width:100%;
+  height: 45px;
+}
+
+.creator-profile-header-modify{
+  /* margin-top: 350px;*/
+  margin-right: 20px;
+  float:right;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  background-color: #d2d2d2;
+  text-align: center;
+  line-height: 51px;
+  cursor: pointer;
+  
+}
+
+#creator-descrption-btn-wrap button{
+  margin-top: 8px;
+}
+
+.creator-description-textarea > textarea{
+  background-color: #1c1c1c;
+  border:none;
+  resize: vertical;
+  
+}
+
+.creator-profile-img-input{
+  cursor: pointer;
+  width: 36px;
+  opacity: 0;
+  margin-left: -6px;
+  margin-top: -5px;
+}
+
+.creator-content-info-edit1{
+  min-height: 30px;
+}
+
+.creator-content-info-edit2{
+  min-height: 30px;
+  text-align: center;
+}
+
+.creator-content-info-edit1 button{
+  width: 35px;
+  height: 35px;
+  display: inline-block;
+  float: right;
+  background-color: #fff;
+  border-radius: 50%;
+  margin-left: 7px;
+  line-height: 27px;
+  color: #2d2d2d;
+  border:none;
+}
+
+.glyphicon{
+  font-weight: bold;
+}
+
+.creator-content-info-textarea > textarea{
+  margin-left: 1.5px;
+  background-color: #272626;
+  border:none;
+  resize: vertical;
+  padding:5px 10px;
+  width:99%;
+  height: 110px;
+}
+
+.creator-content-info-edit2 button{
+  height: 25px;
+  line-height: 11px;
+}
