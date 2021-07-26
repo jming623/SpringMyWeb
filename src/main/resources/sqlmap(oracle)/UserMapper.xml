@@ -8,16 +8,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.team404.user.mapper.UserMapper">
 
 	<select id="idCheck" resultType="int">
-		select count(*) as result from USERS where userId = #{userId}
+		select count(*) as result from users where userId = #{userId}
 	</select>
 	
 	<insert id="join">
-		insert into USERS(userId,userPw,userName,userEmail1,userEmail2,addrZipNum,addrBasic,addrDetail)
+		insert into users(userId,userPw,userName,userEmail1,userEmail2,addrZipNum,addrBasic,addrDetail)
 		values(#{userId}, #{userPw}, #{userName}, #{userEmail1}, #{userEmail2}, #{addrZipNum}, #{addrBasic}, #{addrDetail}) 
 	</insert>
 	
 	<select id="login" resultType="UserVO">
-		select * from USERS where userId = #{userId} and userPw = #{userPw}
+		select * from users where userId = #{userId} and userPw = #{userPw}
 	</select>
 	
 	<!-- 현재(수정전) userVO에는 bno,title,regdate를 받아줄 변수가 선언되어있지않다. 해결방법 UserVO에 FreeBoardVO를 받아줄수 있는 ArrayList를 선언하고, -->
@@ -33,8 +33,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        		   f.bno,
        		   f.title,
        		   f.regdate
-		from USERS u
-		left outer join FREEBOARD f
+		from users u
+		left outer join freeboard f
 		on u.userid = f.writer
 		where userId =#{userId}
 	</select>

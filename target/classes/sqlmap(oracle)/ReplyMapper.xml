@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace에는 인터페이스에 전체경로가 들어갑니다. -->
+
+<mapper namespace="com.team404.reply.mapper.ReplyMapper">
+
+	<insert id="regist">
+		insert into freereply(rno,bno,reply,replyid,replypw)
+		values(freereply_seq.nextval,#{bno},#{reply},#{replyId},#{replyPw})
+	</insert>
+	
+	<select id="getList" resultType="FreeReplyVO">
+	<![CDATA[
+		select *
+		from(select rownum rn,
+            		a.*,
+            		case when gap <= 60 then '방금전'
+                 	when gap <= 60 * 24 then trunc(gap/60)||'시간전'
+                 	else to_char(replydate,'YYYY-MM-DD')
+            		end as timegap
+     		from(select bno,
+                 		rno,
+                 		reply,
+                 		replyid,
+                 		replydate,
+                 		updatedate,
+                 		trunc( (sysdate - replydate) * 24 * 60) as gap
+          		from freereply where bno =#{bno} order by rno desc
+         		) a 
+    		)
+		where rn > (#{cri.pageNum} - 1) * #{cri.amount} and rn <= #{cri.pageNum} * #{cri.amount}
+
+	]]>
+	</select>
+	
+	<select id="getTotal" resultType="int">
+		select count(*) as total from freereply where bno = #{bno}
+	</select>
+	
+	<!--   -->
+	<select id = "pwCheck" resultType="int">
+		select count(*) as count
+		from freereply where rno = #{rno} and replypw = #{replyPw}
+	</select>
+	
+	<update id="update">
+		update freereply
+		set reply = #{reply},
+			updateDate = sysdate  
+		where rno = #{rno}
+	</update>
+	
+	<delete id="delete">
+		delete from freereply where rno = #{rno}
+	</delete>
+	
+</mapper>

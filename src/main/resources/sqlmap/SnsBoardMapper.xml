@@ -8,12 +8,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.team404.snsboard.mapper.SnsBoardMapper">
 	
 	<insert id="insert">
-		insert into snsboard(bno, writer, content, uploadpath, fileloca, filename, filerealname)
-		values(snsboard_seq.nextval, #{writer}, #{content}, #{uploadPath}, #{fileLoca}, #{fileName}, #{fileRealName})
+		insert into SNSBOARD(writer, content, uploadpath, fileloca, filename, filerealname)
+		values(#{writer}, #{content}, #{uploadPath}, #{fileLoca}, #{fileName}, #{fileRealName})
 	</insert>
 	
 	<select id="getList" resultType="SnsBoardVO">
-		select * from snsboard order by bno desc
+		select * from SNSBOARD order by bno desc
 	</select>
 
 </mapper>
