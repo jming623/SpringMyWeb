@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from(select @rownum := @rownum +1 rn,
             		a.*,
 					case when gap <= 60 then '방금전'
-					when gap <= 60 * 24 then truncate(gap / 60, 0)||'시간전'
+					when gap <= 60 * 24 then concat(truncate(gap / 60, 0),'시간전')
 					else date_format(replydate,'%Y-%m-%d')
 					end as timegap
       		 from(select bno,

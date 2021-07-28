@@ -31,7 +31,7 @@ public class LoginSuccessHandler extends HandlerInterceptorAdapter{
 			HttpSession session = request.getSession();
 			session.setAttribute("userVO", userVO);
 			
-			response.sendRedirect(request.getContextPath()); //홈화면으로
+			response.sendRedirect(request.getContextPath()+"/"); //홈화면으로
 		}
 			//리다이렉트를 만나더라도 viewname은 지정이 필요합니다. 
 			modelAndView.setViewName("user/userLogin");

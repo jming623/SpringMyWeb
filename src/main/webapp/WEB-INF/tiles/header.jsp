@@ -13,14 +13,15 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="${pageContext.request.contextPath}"><img width="30" src="${pageContext.request.contextPath }/resources/img/logo.svg" alt="Brand"></a>
+                            <a class="navbar-brand" href="${pageContext.request.contextPath}/"><img width="30" src="${pageContext.request.contextPath }/resources/img/logo.svg" alt="Brand"></a>
                         </div>
 
 
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav">
-                                <li class="active"><a href="${pageContext.request.contextPath}">Main</a></li>
+                                <li class="active"><a href="${pageContext.request.contextPath}/">Main</a></li>
                                 <li><a href="${pageContext.request.contextPath}/freeBoard/freeList">자유게시판</a></li>
+                                <li><a href="${pageContext.request.contextPath}/snsBoard/snsList">업로드</a></li>
                                 
                                 <!-- 
 								<li><a href="#">강의</a></li>

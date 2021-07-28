@@ -65,7 +65,7 @@ public class SnsBoardController {
 			
 			//업로드될 파일 경로를 지정해줄 메서드는 상수형태로 지정해두고 불러오는식으로 한번에 관리를하는편이 편하다고함(컨트롤러 패키지안에 APP_CONSTANT에 지정해둠).
 			
-			File saveFile = new File(APP_CONSTANT.UPLOAD_PATH + "\\" + fileRealName); //업로드경로
+			File saveFile = new File(APP_CONSTANT.UPLOAD_PATH + fileRealName); //업로드경로
 			
 			file.transferTo(saveFile); //실제 파일을 로컬환경으로 저장
 			
@@ -104,7 +104,7 @@ public class SnsBoardController {
 				
 				//업로드될 파일 경로를 지정해줄 메서드는 상수형태로 지정해두고 불러오는식으로 한번에 관리를하는편이 편하다고함(컨트롤러 패키지안에 APP_CONSTANT에 지정해둠).
 				
-				File saveFile = new File(APP_CONSTANT.UPLOAD_PATH + "\\" + fileRealName); //업로드경로
+				File saveFile = new File(APP_CONSTANT.UPLOAD_PATH + fileRealName); //업로드경로
 				
 				file.get(i).transferTo(saveFile); //실제 파일을 로컬환경으로 저장
 			}
@@ -124,7 +124,7 @@ public class SnsBoardController {
 			for(int i = 0; i < file.size(); i++) {
 				String fileRealName = file.get(i).getOriginalFilename(); //파일의 실제 이름
 				
-				File saveFile = new File(APP_CONSTANT.UPLOAD_PATH+"\\"+fileRealName);
+				File saveFile = new File(APP_CONSTANT.UPLOAD_PATH+ fileRealName);
 				
 				file.get(i).transferTo(saveFile);
 			}
@@ -158,7 +158,7 @@ public class SnsBoardController {
 				
 				//업로드될 파일 경로를 지정해줄 메서드는 상수형태로 지정해두고 불러오는식으로 한번에 관리를하는편이 편하다고함(컨트롤러 패키지안에 APP_CONSTANT에 지정해둠).
 				
-				File saveFile = new File(APP_CONSTANT.UPLOAD_PATH + "\\" + fileRealName); //업로드경로
+				File saveFile = new File(APP_CONSTANT.UPLOAD_PATH + fileRealName); //업로드경로
 				
 				list.get(i).getFile().transferTo(saveFile); //실제 파일을 로컬환경으로 저장
 			}
@@ -199,7 +199,8 @@ public class SnsBoardController {
 			
 			String fileLoca = sdf.format(date);//폴더위치(사용자 폴더명 지정)
 			
-			File folder = new File(APP_CONSTANT.UPLOAD_PATH + "\\" + fileLoca); //폴더를 만들위치+만들폴더명
+//			File folder = new File(APP_CONSTANT.UPLOAD_PATH + "\\" + fileLoca); //폴더를 만들위치+만들폴더명(로컬)
+			File folder = new File(APP_CONSTANT.UPLOAD_PATH + fileLoca); //폴더를 만들위치+만들폴더명(운영)
 			
 			if(!folder.exists()) {//존재 하지않으면 생성됨 
 				
@@ -230,7 +231,8 @@ public class SnsBoardController {
 			System.out.println("업로드경로:" + uploadPath);
 			System.out.println("업로드파일명:" + fileName);
 			
-			File saveFile = new File(uploadPath + "\\" + fileName);
+//			File saveFile = new File(uploadPath + "\\" + fileName);//(로컬)
+			File saveFile = new File(uploadPath + "/" + fileName);//(운영)
 			file.transferTo(saveFile);//파일생성
 			
 			SnsBoardVO vo = new SnsBoardVO(0,writer,content,uploadPath,fileLoca,fileName,fileRealName,null);
@@ -302,7 +304,9 @@ public class SnsBoardController {
 		
 		try {
 		//파일데이터를 바이트데이터로 변환해서 반환
-		File file = new File(APP_CONSTANT.UPLOAD_PATH + "\\" + fileLoca + "\\" + fileName);
+//		File file = new File(APP_CONSTANT.UPLOAD_PATH + "\\" + fileLoca + "\\" + fileName);//(로컬)
+		File file = new File(APP_CONSTANT.UPLOAD_PATH + fileLoca + "/" + fileName);//(운영)
+		
 		
 		//반환할 헤더객체
 		HttpHeaders header = new HttpHeaders();
@@ -329,7 +333,8 @@ public class SnsBoardController {
 		
 		try {
 			
-			File file = new File(APP_CONSTANT.UPLOAD_PATH+"\\"+fileLoca+"\\"+fileName);
+//			File file = new File(APP_CONSTANT.UPLOAD_PATH+"\\"+fileLoca+"\\"+fileName);//(로컬)
+			File file = new File(APP_CONSTANT.UPLOAD_PATH + fileLoca + "/" +fileName);//(운영)
 			
 			//반환할 헤더객체(다운로드형식으로 속성을 추가)
 			HttpHeaders header = new HttpHeaders();
